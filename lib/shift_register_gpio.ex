@@ -1,4 +1,6 @@
-defmodule ShiftRegister do
+defmodule ShiftRegister.GPIO do
+  alias ShiftRegister.Util
+
   use GenServer
   use Bitwise
 
@@ -69,7 +71,7 @@ defmodule ShiftRegister do
 
   @impl GenServer
   def handle_info(:step, state) do
-    new_value = random_value(state.last_value)
+    new_value = Util.random_value(state.last_value)
 
     transfer_value(
       new_value,
@@ -83,15 +85,6 @@ defmodule ShiftRegister do
     state = %{state | last_value: new_value}
 
     {:noreply, state}
-  end
-
-  defp random_value(last_value) do
-    new_value = :rand.uniform(16)
-
-    case last_value == new_value do
-      true -> random_value(last_value)
-      _ -> new_value
-    end
   end
 
   defp transfer_value(value, shift_clock_ref, data_ref, storage_clock_ref) do

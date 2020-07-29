@@ -48,6 +48,7 @@ defmodule ShiftRegister.MixProject do
       {:nerves_runtime, "~> 0.6", targets: @all_targets},
       {:nerves_pack, "~> 0.2", targets: @all_targets},
       {:circuits_gpio, "~> 0.4.5", targets: @all_targets},
+      {:circuits_spi, "~> 0.1.5", targets: @all_targets},
 
       # Dependencies for specific targets
       {:nerves_system_bbb, "~> 2.7", runtime: false, targets: :bbb},
